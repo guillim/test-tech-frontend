@@ -3,7 +3,7 @@ import {useState,useEffect} from 'react'
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import Swal from 'sweetalert2'
-
+import {useHistory} from 'react-router-dom'
 const localizer = momentLocalizer(moment)
 
 
@@ -22,6 +22,7 @@ const CalendarContainer = ({data}) => {
     })
   }
   const [events, setEvents] = useState(meetings)
+  const history = useHistory()
 
   const handleSelect = ({ start, end }) => {
     Swal.mixin({
@@ -68,9 +69,11 @@ const CalendarContainer = ({data}) => {
           console.log('here we are',res)
           Swal.fire({
             title: 'Meeting booked! You can quit this page',
-            html: `Remember your password : ${res.meeting.password} <p>Start at: ${res.meeting.start_time}</p><p>Join at: ${res.meeting.join_url}</p>`,
-            confirmButtonText: 'Finished!'
+            html: `Remember your password : ${res.meeting.password} <p>Start at: ${moment(res.meeting.start_time).format("dddd, MMMM Do YYYY, h:mm:ss a")}</p><p>Keep your connection link: ${res.meeting.join_url}</p>`,
+            confirmButtonText: 'Finished!',
+            didDestroy:() => { window.location.reload(false) }
           })
+
         })
         .catch(e => {
           console.log(e)
