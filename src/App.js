@@ -1,8 +1,12 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 import CalendarContainer from './CalendarContainer';
+import useFetch from './fetch'
 
 function App() {
+
+  const {data, isPending, error} = useFetch('http://localhost:4000/meetings')
+
   return (
     <div className="App">
     <Router>
@@ -23,7 +27,8 @@ function App() {
           </header>
         </Route>
         <Route exact path="/calendar">
-          <CalendarContainer/>
+          {isPending && <p>please wait, while loading</p>}
+          {!isPending && <CalendarContainer data={data}/>}
         </Route>
         <Route path='*'>
           <p>not found</p>
