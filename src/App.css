@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.calendarContainer {
+  height: 500px;
+  background-color: lightgrey;
+  margin : 50px;
+}

@@ -1,6 +1,6 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
-import Calendar from './Calendar';
+import CalendarContainer from './CalendarContainer';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <Route exact path="/">
           <header className="App-header">
             <p>
-              Follow the link bellow to select your meeting. You will be able to choose a time by click on a timeslot.
+              Follow the link bellow to select your meeting. You will be able to choose a time by click on a timeslot (hold your click to selct more than one timelsot).
             </p>
             <Link to='/calendar'>
               <span
@@ -23,7 +23,7 @@ function App() {
           </header>
         </Route>
         <Route exact path="/calendar">
-          <Calendar/>
+          <CalendarContainer/>
         </Route>
         <Route path='*'>
           <p>not found</p>
